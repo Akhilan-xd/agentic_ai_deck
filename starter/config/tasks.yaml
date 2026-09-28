@@ -1,0 +1,16 @@
+research_task:
+  description: >
+    Research {topic}. List the main facts, the open questions, and why
+    each one matters to someone getting started.
+  expected_output: >
+    Bullet notes with facts, uncertainties, and sources when you know them.
+  agent: researcher
+
+write_task:
+  description: >
+    Using the research notes, write a brief on {topic} for a new teammate.
+  expected_output: >
+    A short brief with a summary, key points, and suggested next steps.
+  agent: writer
+  context:
+    - research_task
