@@ -1,0 +1,22 @@
+{
+  // File name is the agent id: paper_extractor.jsonc → "paper_extractor".
+  // Tasks in crew.jsonc point at this id with "agent": "paper_extractor".
+  "role": "Paper Extractor",
+
+  "goal": "Extract the requested fields from the paper {pdf_filename}, using only what the paper says.",
+
+  "backstory": "You are a careful reader of research papers. You pull out specific fields and leave a field blank when the paper does not state it.",
+
+  "llm": {
+    "model": "llama3.1:8b",
+    "provider": "ollama",
+    "base_url": "http://localhost:11434"
+  },
+
+  "tools": ["custom:read_pdf"],
+
+  "settings": {
+    "verbose": true,
+    "allow_delegation": false
+  }
+}

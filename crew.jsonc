@@ -1,0 +1,43 @@
+{
+  "name": "qa_crew",
+
+  // Only agents listed here are loaded. The file question_answering_assistant.jsonc
+  // is ignored until its name appears in this list.
+  "agents": ["paper_extractor","librarian","obsidian_publisher"],
+
+  "tasks": [
+    {
+      "name": "extract_paper_fields",
+      "description": "Use the Read PDF tool on {pdf_filename} and extract only from that tool result. Read the research paper {pdf_filename}. Extract these fields: title, abstract, problem formulation, proposed solution, method, dataset, performance metrics, related studies, state of the art, conclusion, future scope. Quote or closely paraphrase the paper. If a field is absent, write NOT STATED.",
+      "expected_output": "A labeled list with exactly these headings: Title, Abstract, Problem formulation, Proposed solution, Method, Dataset, Performance metrics, Related studies, State of the art, Conclusion, Future scope. Under each heading, the extracted text or NOT STATED.",
+      "agent": "paper_extractor"
+    },
+
+    {
+      "name": "write_library_notes",
+      "description": "Using the extracted fields, write Obsidian markdown. One note for the paper. Separate notes for the method, the dataset, each performance metric, and each related study. Link them with [[Note Title]] wikilinks. Use the same note title every time you refer to the same thing.",
+      "expected_output": "A set of markdown notes. Each note starts with a heading that is its title, includes YAML frontmatter with a type (paper, method, dataset, metric, or study), and links to related notes with [[wikilinks]].",
+      "agent": "librarian",
+      "context": ["extract_paper_fields"]
+    },
+
+    {
+      "name": "publish_notes",
+      "description": "Read the librarian notes. For each note, call Save Obsidian Note once. Put the paper note in papers, methods in methods, datasets in datasets, metrics in metrics, and related studies in studies. Pass the note title as title and the full markdown, including frontmatter, as body.",
+      "expected_output": "A short list of the files that were written, one path per line.",
+      "agent": "obsidian_publisher",
+      "context": ["write_library_notes"]
+    }
+
+  ],
+
+  // Tasks run in the order written above. The next agent will receive this
+  // task's output when we add it and set "context": ["extract_paper_fields"].
+  "process": "sequential",
+  "verbose": true,
+  "memory": false,
+
+  "inputs": {
+    "pdf_filename": "2505.00527v2.pdf"
+  }
+}
