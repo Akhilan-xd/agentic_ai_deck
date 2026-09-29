@@ -8,8 +8,9 @@ researcher:
   verbose: true
   max_iter: 5
   # Uncomment after the basic crew runs. The name must match a @tool method.
-  # tools:
-  #   - word_count
+  tools:
+    - word_count
+    - whitespace_tool
 
 writer:
   role: Brief writer
@@ -17,6 +18,14 @@ writer:
   backstory: >
     You write in plain language. You keep the brief under one page and
     end with concrete next steps.
+  llm: local
+  verbose: true
+  max_iter: 5
+
+editor:
+  role: Editor
+  goal: Tighten the brief on {topic} without adding new claims
+  backstory: You cut repetition and flag anything the research notes do not support.
   llm: local
   verbose: true
   max_iter: 5

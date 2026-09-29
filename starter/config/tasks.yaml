@@ -14,3 +14,10 @@ write_task:
   agent: writer
   context:
     - research_task
+
+edit_task:
+  description: Edit the brief on {topic}. Keep every claim tied to the research notes.
+  expected_output: The revised brief, plus a short list of cuts you made.
+  agent: editor
+  context:
+    - write_task
