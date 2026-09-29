@@ -1,4 +1,4 @@
-"""Example tool. Copy this file when you add your own."""
+# counts spaces, tabs, and newlines
 
 from crewai.tools import BaseTool
 
@@ -8,4 +8,8 @@ class WhitespaceTool(BaseTool):
     description: str = "Count the whitespace in a piece of text. Input is the text to count."
 
     def _run(self, text: str) -> str:
-        return str(len(text.strip()))
+        count = 0
+        for letter in text:
+            if letter == " " or letter == "\n" or letter == "\t":
+                count = count + 1
+        return str(count)

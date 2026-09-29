@@ -7,5 +7,6 @@ __pycache__/
 .ollama/
 *.egg-info/
 .pytest_cache/
+spoken/
 dist/
 build/

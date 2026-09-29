@@ -1,4 +1,4 @@
-"""Crew definition. Add agents and tasks here, and describe them in config/."""
+# wires the agents and tasks from the yaml files
 
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, llm, task, tool
@@ -10,8 +10,6 @@ from starter.tools.whitespace import WhitespaceTool
 
 @CrewBase
 class StarterCrew:
-    """Two-agent crew: research a topic, then write a short brief."""
-
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
@@ -35,10 +33,14 @@ class StarterCrew:
     def writer(self) -> Agent:
         return Agent(config=self.agents_config["writer"])
 
+    @agent
+    def editor(self) -> Agent:
+        return Agent(config=self.agents_config["editor"])
+
     @task
     def research_task(self) -> Task:
         return Task(config=self.tasks_config["research_task"])
-    
+
     @task
     def write_task(self) -> Task:
         return Task(config=self.tasks_config["write_task"])
@@ -46,10 +48,6 @@ class StarterCrew:
     @task
     def edit_task(self) -> Task:
         return Task(config=self.tasks_config["edit_task"])
-
-    @agent
-    def editor(self) -> Agent:
-        return Agent(config=self.agents_config["editor"])
 
     @crew
     def crew(self) -> Crew:
