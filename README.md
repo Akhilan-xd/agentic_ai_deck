@@ -10,7 +10,10 @@ starter/
   crew.py                 # wires agents, tasks, and tools
   config/agents.yaml      # add a role here
   config/tasks.yaml       # add a step here
+  qa.py                   # spoken Q&A chat; see starter/README.md
   tools/example_tool.py   # copy this when you add a tool
+  tools/reading.py        # book and site lookup for qa.py
+  tools/speech.py         # voice for qa.py
 ```
 
 `{topic}` in the YAML files is filled in when you run the crew.
@@ -104,6 +107,8 @@ python -m starter.main "how a city should roll out internal coding agents"
 The researcher runs first. The writer then receives those notes and prints a brief. The first run is slow because the model loads into memory.
 
 To change the default topic without passing an argument, edit `TOPIC` in `.env`.
+
+For a short chat that answers and then reads the reply aloud, run `python -m starter.qa`. Agents, tools, and the voice setting are in [starter/README.md](starter/README.md).
 
 ## 4. Point it at a different model
 
@@ -238,4 +243,7 @@ Reference `my_tool` under `tools:` in the agent YAML. The YAML name and the meth
 | `starter/crew.py` | Connects YAML names to Python methods |
 | `starter/config/agents.yaml` | Roles, goals, model, optional tools |
 | `starter/config/tasks.yaml` | Steps, expected output, and which agent does each step |
+| `starter/qa.py` | Spoken Q&A chat. Details in `starter/README.md` |
 | `starter/tools/example_tool.py` | Pattern for a custom tool |
+| `starter/tools/reading.py` | Wikipedia and Open Library lookup used by `qa.py` |
+| `starter/tools/speech.py` | Reads the answer aloud and writes `spoken/latest.mp3` |
