@@ -33,4 +33,8 @@ From this directory, with Ollama running `llama3.1:8b` on `http://localhost:1143
 crewai run
 ```
 
+```bash
+CREWAI_DMN=1 crewai run #for in terminal processing
+```
+
 Notes are written under `obsidian_vault/` (`papers/`, `methods/`, `datasets/`, `metrics/`, `studies/`).
