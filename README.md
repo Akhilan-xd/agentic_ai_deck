@@ -1,6 +1,8 @@
-# qa_crew
+# Topic_Extraction_Agent
 
 A CrewAI crew that reads research-paper PDFs and files each one as linked Obsidian notes.
+
+<video src="images/Screencast%20from%2009-30-2026%2001%3A48%3A30%20PM.webm" controls width="100%"></video>
 
 Four agents use tools. The PDF Feeder starts the run. For every filename it hands the paper to three agents, in order:
 
